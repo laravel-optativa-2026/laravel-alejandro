@@ -4,7 +4,7 @@
 |---|---|
 | **Fecha de inicio** | 09/11/2026 |
 | **Fecha de fin** | 16/11/2026 |
-| **Tiempo dedicado** | 1 horas |
+| **Tiempo dedicado** | 2 horas |
 | **Rama de Git** | `tema01` |
 
 ---
