@@ -145,9 +145,146 @@ Route::view('/about', 'landing.about')->name('about');
 Route::view('/services', 'landing.services')->name('services');
 Route::view('/contact', 'landing.contact')->name('contact');
 ```
-Probando rutas
+*Probando rutas*
+---
+
+**localhost:8080**'
+
+![index.php](img/tema02/index.blade.php.png)
+
+**localhost:8080/about**
+
+![about.php](img/tema02/about.blade.php.png)
+
+**localhost:8080/contact**
+
+![about.php](img/tema02/contact.blade.php.png)
+
+**localhost:8080/services**
+
+![about.php](img/tema02/services.blade.php.png)
 
 ---
+### 2.3 Creación de un Layout base
+Creamos la carpeta layout en `resources/views/landing/aquí`
+
+Creo dentro de `/layout/` **landing.blade.php**
+```php
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        @yield('title')
+    </title>
+</head>
+<body>
+    <header>
+        @yield('header')
+    </header>
+
+    <main>
+        @yield('content')
+    </main>
+
+    <footer>
+        <p>Pie de página &copy; 2025</p>
+    </footer>
+</body>
+</html>
+``` 
+`index.blade.php` *ahora*
+```php
+@extends('landing.layouts.landing')
+@section('title', 'Inicio')
+@section('header')
+    <h1>Bienvenido a nuestra web</h1>
+@endsection
+@section('content')
+    <p>Esta es la página de inicio.</p>
+@endsection
+```
+`about.blade.php` *ahora*
+```php
+@extends('landing.layouts.landing')
+@section('title', 'Sobre nosotros')
+@section('header')
+    <h1>Sobre nosotros</h1>
+@endsection
+@section('content')
+    <p>Información sobre nuestra empresa.</p>
+@endsection
+```
+
+`services.blade.php` *ahora*
+```php
+@extends('landing.layouts.landing')
+@section('title', 'Servicios')
+@section('header')
+    <h1>Servicios</h1>
+@endsection
+@section('content')
+    <p>Descripción de nuestros servicios.</p>
+@endsection
+```
+`contact.blade.php` *ahora*
+```php
+@extends('landing.layouts.landing')
+@section('title', 'Contacto')
+@section('header')
+    <h1>Contacto</h1>
+@endsection
+@section('content')
+    <p>Formulario de contacto.</p>
+@endsection
+```
+___
+### 2.4 Añadir un menú de navegación
+Añadimos al layout  `layouts/landing.blade.php` el nuevo **header** 
+
+Versión no recomendada
+-
+```php
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/about">Sobre nosotros</a></li>
+            <li><a href="/services">Servicios</a></li>
+            <li><a href="/contact">Contacto</a></li>
+        </ul>
+    </nav>
+    @yield('header')
+</header>
+```
+Versión recomendada
+-
+```php
+<nav>
+    <ul>
+        <li><a href="{{ route('home') }}">Inicio</a></li>
+        <li><a href="{{ route('about') }}">Sobre nosotros</a></li>
+        <li><a href="{{ route('services') }}">Servicios</a></li>
+        <li><a href="{{ route('contact') }}">Contacto</a></li>
+    </ul>
+</nav>
+```
+### 2.5 Uso de Partials
+
+Creamos una carpeta nueva en `resources/views/` llamada **_partials**
+
+Creamos dentro `nav.blade.php`
+-
+```php
+<nav>
+    <ul>
+        <li><a href="{{ route('home') }}">Inicio</a></li>
+        <li><a href="{{ route('about') }}">Sobre nosotros</a></li>
+        <li><a href="{{ route('services') }}">Servicios</a></li>
+        <li><a href="{{ route('contact') }}">Contacto</a></li>
+    </ul>
+</nav>
+```
 
 ## 3. 📋 Resumen de comandos utilizados
 
